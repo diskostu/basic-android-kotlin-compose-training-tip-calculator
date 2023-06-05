@@ -62,13 +62,15 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+const val TipPercentageDefault = 15.0
+
 @Composable
 fun TipTimeLayout() {
     var amountInput by remember { mutableStateOf("") }
     var tipPercentageInput by remember { mutableStateOf("") }
 
     val amount = amountInput.toDoubleOrNull() ?: 0.0
-    val tipPercentage = tipPercentageInput.toDoubleOrNull() ?: 0.0
+    val tipPercentage = tipPercentageInput.toDoubleOrNull() ?: TipPercentageDefault
     val tip = calculateTip(amount, tipPercentage)
 
     Column(
@@ -128,7 +130,7 @@ fun EditNumberField(
  * according to the local currency.
  * Example would be "$10.00".
  */
-private fun calculateTip(amount: Double, tipPercent: Double = 15.0): String {
+private fun calculateTip(amount: Double, tipPercent: Double = TipPercentageDefault): String {
     val tip = tipPercent / 100 * amount
     return NumberFormat.getCurrencyInstance().format(tip)
 }
