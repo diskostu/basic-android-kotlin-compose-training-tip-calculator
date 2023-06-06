@@ -48,6 +48,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -56,6 +57,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tiptime.ui.theme.TipTimeTheme
 import java.text.NumberFormat
+
+const val TEST_TAG_BILL_AMOUNT = "TEST_TAG_BILL_AMOUNT"
+const val TEST_TAG_PERCENTAGE = "TEST_TAG_PERCENTAGE"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,7 +112,7 @@ fun TipTimeLayout() {
             ),
             value = amountInput,
             onValueChanged = { amountInput = it },
-            modifier = Modifier.padding(bottom = 32.dp).fillMaxWidth(),
+            modifier = Modifier.padding(bottom = 32.dp).fillMaxWidth().testTag(TEST_TAG_BILL_AMOUNT),
         )
         EditNumberField(
             label = R.string.how_was_the_service,
@@ -119,7 +123,7 @@ fun TipTimeLayout() {
             ),
             value = tipInput,
             onValueChanged = { tipInput = it },
-            modifier = Modifier.padding(bottom = 32.dp).fillMaxWidth(),
+            modifier = Modifier.padding(bottom = 32.dp).fillMaxWidth().testTag(TEST_TAG_PERCENTAGE),
         )
         RoundTheTipRow(
             roundUp = roundUp,
